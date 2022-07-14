@@ -35,6 +35,9 @@ export class UserController {
                 password: req.body.password
             };
 
+            //deveria ser se tem erro  no usario e senha
+            // if(!email || !password) { ja mando erro}
+
             const userBusiness = new UserBusiness();
             const token = await userBusiness.getUserByEmail(loginData);
 
