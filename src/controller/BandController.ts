@@ -1,9 +1,12 @@
 import {Request, response, Response} from "express"; 
-// preciso fazer BandRegisterDTO 
+import { BandBusiness } from "../business/BandBusiness";
+import { BandDatabase } from "../data/BandDatabase";
 //preciso fazer bandBusiness 
 import { BaseDatabase } from "../data/BaseDatabase";
+import { UserDatabase } from "../data/UserDatabase";
 import { BandRegistrationInputDTO } from "../model/Band";
 import { Authenticator } from "../services/Authenticator";
+import { IdGenerator } from "../services/IdGenerator";
 
 
 //processa as informações inicias do nosso endpoint
@@ -66,8 +69,9 @@ export class BandController {
             }
 
             //chamar o bandBusiness para fazer cadastro
+            let bandBusiness = new BandBusiness(new IdGenerator(),new UserDatabase(), new BandDatabase)
             //mandar mensagem de cadastro efetuado com sucesso
-
+            await bandBusiness.registerBand(newBandInformation);
             res.status(201).send({message: "Banda cadastrada com sucesso!"})
 
         } catch (error:any) {
