@@ -28,13 +28,22 @@ export class UserBusiness {
         const userDatabase = new UserDatabase();
         const userFromDB = await userDatabase.getUserByEmail(user.email);
 
+        //ver se email existe no banco de dados
+
+
+        //criptografar senha (hash a senha)
         const hashManager = new HashManager();
         const hashCompare = await hashManager.compare(user.password, userFromDB.getPassword());
 
+
+        //se nao bater na base de dados, ou seja login errado dar erro
+
+
+        //se tiver certo, gerar um token 
         const authenticator = new Authenticator();
         const accessToken = authenticator.generateToken({ id: userFromDB.getId(), role: userFromDB.getRole() });
 
-        if (!hashCompare) {
+        if (!hashCompare) { //MANDAR ERRO
             throw new Error("Invalid Password!");
         }
 
