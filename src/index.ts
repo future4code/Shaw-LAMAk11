@@ -16,7 +16,7 @@ app.use("/band", bandRouter)
 app.use("/show", showRouter )
 app.use("/search", showRouter)
 
-const server = app.listen(process.env.DB_PORT || 3003, () => {
+const server = app.listen(  3003, () => {
     if (server) {
       const address = server.address() as AddressInfo;
       console.log(`Servidor rodando em http://localhost:${address.port}`);

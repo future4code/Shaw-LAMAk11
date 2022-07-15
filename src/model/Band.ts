@@ -8,6 +8,6 @@ export interface BandRegistrationInputDTO{
 export type Band = {
     id:string, 
     name:string, 
-    musicGenre:string, 
+    music_genre:string, 
     responsible:string
 }
