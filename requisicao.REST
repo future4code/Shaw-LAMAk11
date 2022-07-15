@@ -1,0 +1,9 @@
+POST  http://localhost:3306/user/signup
+Content-Type: application/json
+
+{
+    "email": "regiscleia4@email.com",
+    "name": "Regiscleia",
+    "password": 123456,
+    "role": "NORMAL"
+}

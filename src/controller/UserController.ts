@@ -15,7 +15,9 @@ export class UserController {
             }
 
             const userBusiness = new UserBusiness();
-            const token = await userBusiness.createUser(input);
+            await userBusiness.createUser(input);
+
+            const token = await userBusiness.getUserByEmail({email: input.email, password: input.password});
 
             res.status(200).send({ token });
 
@@ -29,14 +31,20 @@ export class UserController {
     async login(req: Request, res: Response) {
 
         try {
+           
+            const {email, password}=req.body
 
             const loginData: LoginInputDTO = {
-                email: req.body.email,
-                password: req.body.password
-            };
+                email,
+                password
+            }
+            if(!email || !password) { 
+                throw new Error("prenchimento obrigatorio");
+                
+             }
 
             //deveria ser se tem erro  no usario e senha
-            // if(!email || !password) { ja mando erro}
+       
 
             const userBusiness = new UserBusiness();
             const token = await userBusiness.getUserByEmail(loginData);

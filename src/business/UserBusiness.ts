@@ -9,10 +9,10 @@ export class UserBusiness {
     async createUser(user: UserInputDTO) {
 
         const idGenerator = new IdGenerator();
-        const id = idGenerator.generate();
+        const id = idGenerator.generateId();
 
         const hashManager = new HashManager();
-        const hashPassword = await hashManager.hash(user.password);
+        const hashPassword = await hashManager.hashText(user.password);
 
         const userDatabase = new UserDatabase();
         await userDatabase.createUser(id, user.email, user.name, hashPassword, user.role);
@@ -21,10 +21,10 @@ export class UserBusiness {
         const accessToken = authenticator.generateToken({ id, role: user.role });
 
         return accessToken;
-    }
+    }   
 
     async getUserByEmail(user: LoginInputDTO) {
-
+        console.log(user)
         const userDatabase = new UserDatabase();
         const userFromDB = await userDatabase.getUserByEmail(user.email);
 
@@ -33,7 +33,7 @@ export class UserBusiness {
 
         //criptografar senha (hash a senha)
         const hashManager = new HashManager();
-        const hashCompare = await hashManager.compare(user.password, userFromDB.getPassword());
+        const hashCompare = await hashManager.comparePlainTextToHashedPassword(user.password, userFromDB.getPassword());
 
 
         //se nao bater na base de dados, ou seja login errado dar erro
@@ -46,7 +46,7 @@ export class UserBusiness {
         if (!hashCompare) { //MANDAR ERRO
             throw new Error("Invalid Password!");
         }
-
+        console.log(accessToken)
         return accessToken;
     }
 }
