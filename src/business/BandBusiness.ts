@@ -33,4 +33,19 @@ export class BandBusiness {
         }
         await this.bandDatabase.createBand(newBand); 
     }
+
+    async returnAllBands(){
+        let bands = this.bandDatabase.getAllBands();
+        return bands; 
+    }
+
+    async findBandByName(bandName:string){
+        let band = await this.bandDatabase.getBandByName(bandName);
+        return band[0]; 
+    }
+
+    async findBandById(bandId:string){
+        let band = await this.bandDatabase.getBandById(bandId); 
+        return band[0];
+    }
 }
