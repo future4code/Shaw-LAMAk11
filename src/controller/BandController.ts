@@ -2,7 +2,6 @@ import {Request, response, Response} from "express";
 import { BandBusiness } from "../business/BandBusiness";
 import { BandDatabase } from "../data/BandDatabase";
 //preciso fazer bandBusiness 
-import { BaseDatabase } from "../data/BaseDatabase";
 import { UserDatabase } from "../data/UserDatabase";
 import { BandRegistrationInputDTO } from "../model/Band";
 import { Authenticator } from "../services/Authenticator";
@@ -37,7 +36,7 @@ export class BandController {
                 throw new Error("Campo 'musicGenre' tem que ser string")
             }
 
-            if(responsible !== 'string') 
+            if(typeof responsible !== 'string') 
             {
                 throw new Error("Campo 'responsible' tem que ser string")
             }
