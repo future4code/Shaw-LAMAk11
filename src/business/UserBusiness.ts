@@ -3,6 +3,7 @@ import { UserDatabase } from "../data/UserDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
+import { string } from "yup";
 
 export class UserBusiness {
 
@@ -34,7 +35,6 @@ export class UserBusiness {
         //criptografar senha (hash a senha)
         const hashManager = new HashManager();
         const hashCompare = await hashManager.comparePlainTextToHashedPassword(user.password, userFromDB.getPassword());
-
 
         //se nao bater na base de dados, ou seja login errado dar erro
 
