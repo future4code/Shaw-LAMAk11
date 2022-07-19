@@ -2,8 +2,24 @@ POST  http://localhost:3306/user/signup
 Content-Type: application/json
 
 {
-    "email": "regiscleia4@email.com",
-    "name": "Regiscleia",
+    "email": "Marcelo@email.com",
+    "name": "Marcelo",
     "password": 123456,
-    "role": "NORMAL"
+    "role": "ADMIN"
 }
+
+
+###
+
+POST  http://localhost:3306/show/addShow
+Content-Type: application/json
+
+{
+    "band_id": "1",
+    "week_day": "SEXTA",
+    "start_time": "9:00" ,
+    "end_time": "14:00" 
+}
+
+###
+GET http://localhost:3306/search?weekday=SEXTA

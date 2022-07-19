@@ -31,7 +31,7 @@ export class UserDatabase extends BaseDatabase {
     const result = await this.getConnection()
       .select("*")
       .from(UserDatabase.TABLE_NAME)
-      .where({ email });
+      .where({email });
 
     return User.toUserModel(result[0]);
   }
